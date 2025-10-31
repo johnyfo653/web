@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roman F. Apps – Každý nápad může ožít s pomocí AI</title>
+<meta name="description" content="Oficiální web Roman F. Apps – tvorba aplikací a her s AI. Každý nápad může ožít s pomocí AI.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💎</text></svg>">
+<style>
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --text-main: #fff;
+  --accent: #3a8bff;
+  --font: 'SF Pro Display', 'Segoe UI', sans-serif;
+}
+html,body {
+  margin:0;padding:0;
+  font-family:var(--font);
+  color:var(--text-main);
+  background:linear-gradient(145deg,#0a1e3b,#091220,#1c3d75);
+  background-attachment:fixed;
+  min-height:100vh;
+}
+header {
+  text-align:center;
+  padding:80px 20px 40px 20px;
+}
+h1 {
+  font-size:3em;
+  margin-bottom:0.3em;
+}
+h2 {
+  text-align:center;
+  margin-top:60px;
+}
+p {line-height:1.6em;}
+button, .btn {
+  background:var(--accent);
+  border:none;
+  color:#fff;
+  padding:12px 24px;
+  margin:5px;
+  border-radius:12px;
+  font-size:1em;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  transition:background 0.3s;
+}
+button:hover, .btn:hover {background:#5ca4ff;}
+nav {text-align:center;}
+section {
+  max-width:900px;
+  margin:40px auto;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:30px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 40px rgba(0,0,0,0.3);
+}
+.app-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card {
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:16px;
+  padding:20px;
+  transition:transform 0.3s, background 0.3s;
+}
+.card:hover {transform:translateY(-5px);background:rgba(255,255,255,0.15);}
+.card h3 {margin-top:0;}
+footer {
+  text-align:center;
+  padding:50px 20px;
+  color:#ccc;
+  font-size:0.9em;
+}
+.flag {
+  width:28px;
+  height:20px;
+  cursor:pointer;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,0.3);
+  margin:0 4px;
+}
+.lang-switch {position:absolute;top:20px;right:20px;}
+a {color:#80b3ff;text-decoration:none;}
+a:hover {text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="lang-switch">
+  <img src="https://flagcdn.com/w20/cz.png" class="flag" onclick="setLang('cs')" title="Čeština">
+  <img src="https://flagcdn.com/w20/gb.png" class="flag" onclick="setLang('en')" title="English">
+</div>
+
+<header>
+  <h1 id="title">Roman F. Apps</h1>
+  <p id="slogan">Každý nápad může ožít s pomocí AI</p>
+  <nav>
+    <button onclick="scrollToSection('about')" id="btnAbout">O mně</button>
+    <button onclick="scrollToSection('apps')" id="btnApps">Moje aplikace</button>
+    <button onclick="scrollToSection('contact')" id="btnContact">Kontakt</button>
+  </nav>
+</header>
+
+<section id="about">
+  <h2 id="aboutTitle">O mně</h2>
+  <p id="aboutText">
+    Jmenuji se <b>Roman Förster</b> a vytvářím aplikace a hry, které propojují umělou inteligenci, kreativitu a moderní design.
+    Mým cílem je přinášet projekty, které nejen baví, ale i inspirují.
+    Každá aplikace vzniká s důrazem na kvalitu, estetiku a skutečný přínos pro uživatele.
+  </p>
+</section>
+
+<section id="apps">
+  <h2 id="appsTitle">Aplikace a hry (ve vývoji)</h2>
+  <div class="app-grid" id="appList"></div>
+</section>
+
+<section id="news">
+  <h2 id="newsTitle">Novinky / Vývoj</h2>
+  <div id="newsList"></div>
+</section>
+
+<section id="contact">
+  <h2 id="contactTitle">Kontakt</h2>
+  <p>Email: <a href="mailto:romanforster@gmail.com">romanforster@gmail.com</a><br>
+     Web: <a href="https://roman-apps.webnode.cz" target="_blank">roman-apps.webnode.cz</a></p>
+  <button class="btn" onclick="window.location.href='mailto:romanforster@gmail.com'">Chci spolupracovat</button>
+</section>
+
+<footer>
+  <p>© 2025 Roman F. Apps – Všechna práva vyhrazena</p>
+</footer>
+
+<script>
+const apps = [
+  {name:"Roman AI",desc:"Univerzální AI asistent pro tvorbu a správu projektů.",status:"Ve vývoji",platforms:["iOS","macOS","Windows"]},
+  {name:"YouStream AI",desc:"Video platforma s AI titulky, překladem a monetizací.",status:"TestFlight build",platforms:["iOS","Android","Web"]},
+  {name:"NeoSuit",desc:"3D sci-fi akční hra s realistickou grafikou a AI příběhem.",status:"Publikováno",platforms:["macOS","Windows"]},
+  {name:"Pix Master AI",desc:"Obrázkové křížovky s AI nápovědou a denními výzvami.",status:"Beta",platforms:["iOS","Android","Windows"]}
+];
+const news = [
+  {date:"31.10.2025",title:"YouStream AI – dokončena první beta",details:"Probíhá testování a příprava TestFlight buildu."},
+  {date:"28.10.2025",title:"Roman AI – nový modul simulace aplikací",details:"Automatický režim testování po exportu aktivní."},
+  {date:"20.10.2025",title:"NeoSuit – schváleno pro App Store",details:"První verze k dispozici na macOS Store."}
+];
+
+function renderApps(){
+  const el=document.getElementById('appList');
+  el.innerHTML="";
+  apps.forEach(a=>{
+    const card=document.createElement('div');
+    card.className="card";
+    card.innerHTML=`<h3>${a.name}</h3><p>${a.desc}</p>
+    <p><b>Status:</b> ${a.status}</p>
+    <p><b>Platformy:</b> ${a.platforms.join(', ')}</p>`;
+    el.appendChild(card);
+  });
+}
+function renderNews(){
+  const el=document.getElementById('newsList');
+  el.innerHTML="";
+  news.forEach(n=>{
+    const div=document.createElement('div');
+    div.className="card";
+    div.innerHTML=`<b>${n.date}</b><br><i>${n.title}</i><br>${n.details}`;
+    el.appendChild(div);
+  });
+}
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+function setLang(lang){
+  const cs={
+    slogan:"Každý nápad může ožít s pomocí AI",
+    btnAbout:"O mně",btnApps:"Moje aplikace",btnContact:"Kontakt",
+    aboutTitle:"O mně",
+    aboutText:"Jmenuji se Roman Förster a vytvářím aplikace a hry, které propojují umělou inteligenci, kreativitu a moderní design. Mým cílem je přinášet projekty, které nejen baví, ale i inspirují. Každá aplikace vzniká s důrazem na kvalitu, estetiku a skutečný přínos pro uživatele.",
+    appsTitle:"Aplikace a hry (ve vývoji)",
+    newsTitle:"Novinky / Vývoj",
+    contactTitle:"Kontakt"
+  };
+  const en={
+    slogan:"Every idea can come alive with AI",
+    btnAbout:"About Me",btnApps:"My Apps",btnContact:"Contact",
+    aboutTitle:"About Me",
+    aboutText:"My name is Roman Förster and I create apps and games that combine artificial intelligence, creativity and modern design. My goal is to deliver projects that both inspire and entertain. Each app is crafted with attention to quality, aesthetics and real user value.",
+    appsTitle:"Apps & Games (in development)",
+    newsTitle:"News / Development",
+    contactTitle:"Contact"
+  };
+  const t=(lang==='en')?en:cs;
+  document.getElementById('slogan').innerText=t.slogan;
+  document.getElementById('btnAbout').innerText=t.btnAbout;
+  document.getElementById('btnApps').innerText=t.btnApps;
+  document.getElementById('btnContact').innerText=t.btnContact;
+  document.getElementById('aboutTitle').innerText=t.aboutTitle;
+  document.getElementById('aboutText').innerText=t.aboutText;
+  document.getElementById('appsTitle').innerText=t.appsTitle;
+  document.getElementById('newsTitle').innerText=t.newsTitle;
+  document.getElementById('contactTitle').innerText=t.contactTitle;
+}
+renderApps();
+renderNews();
+</script>
+</body>
+</html>
